@@ -134,7 +134,6 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         //play the movie if no error
         updateViews()
     }
-    
-    
+
 }
 
