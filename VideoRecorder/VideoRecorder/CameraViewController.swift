@@ -42,7 +42,9 @@ setUpCaptureSession()
         
         
         //quality level
-        
+        if captureSession.canSetSessionPreset(.hd1920x1080) {
+            captureSession.sessionPreset = .hd1920x1080
+        }
         // outputs
         
         // set the captureSession into our camera preview view.
