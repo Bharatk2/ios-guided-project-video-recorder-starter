@@ -89,6 +89,9 @@ class CameraViewController: UIViewController {
         
     }
     
+    private func updateViews() {
+        recordButton.isSelected = fileOutput.isRecording
+    }
     
     @IBAction func recordButtonPressed(_ sender: Any) {
         toggleRecording()
@@ -97,8 +100,10 @@ class CameraViewController: UIViewController {
     private func toggleRecording() {
         if fileOutput.isRecording {
             fileOutput.stopRecording()
+            updateViews()
         } else {
             fileOutput.startRecording(to: newRecordingURL(), recordingDelegate: self)
+            updateViews()
         }
     }
     /// Creates a new file URL in the documents directory
@@ -115,10 +120,16 @@ class CameraViewController: UIViewController {
 }
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
-        
+        print("Did start recording: \(fileURL)")
     }
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        if let error = error {
+            print("Error saving movie: \(error)")
+            return
+        }
+        print("Play Movie!")
+        //play the movie if no error
         
     }
     
