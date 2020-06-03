@@ -121,8 +121,28 @@ class CameraViewController: UIViewController {
     }
     
     private func playMovie(url: URL) {
+        let player = AVPlayer(url: url)
         
+        if playerView == nil {
+            
+            // setup view
+            
+            let playerView = VideoPlayerView()
+            playerView.player = player
+            
+            // customize frame
+            var frame = view.bounds
+            frame.size.height = frame.size.height / 4
+            frame.size.width = frame.size.width / 4
+            frame.origin.y = view.layoutMargins.top 
+            playerView.frame = frame
+            view.addSubview(playerView)
+             self.playerView = playerView
+        }
+        player.play()
+         self.player = player
     }
+  
 }
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {

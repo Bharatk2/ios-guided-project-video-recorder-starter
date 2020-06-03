@@ -3,18 +3,14 @@ import UIKit
 import AVFoundation
 
 class VideoPlayerView: UIView {
-    
-    // this sets how the layer of the view is going to look like.
     override class var layerClass: AnyClass {
-        return AVCaptureVideoPreviewLayer.self
+        return AVPlayerLayer.self
     }
-    
-    var videoPlayerView: AVCaptureVideoPreviewLayer {
-        return layer as! AVCaptureVideoPreviewLayer
+    var videoPlayerLayer: AVPlayerLayer {
+        return layer as! AVPlayerLayer
     }
-    
-    var session: AVCaptureSession? {
-        get { return videoPlayerView.session }
-        set { videoPlayerView.session = newValue }
+    var player: AVPlayer? {
+        get { return videoPlayerLayer.player }
+        set { videoPlayerLayer.player = newValue }
     }
 }
