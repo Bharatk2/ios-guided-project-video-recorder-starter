@@ -7,21 +7,27 @@
 //
 
 import UIKit
-
+import AVFoundation
 class CameraViewController: UIViewController {
 
+    lazy var captureSession = AVCaptureSession()
+    
+    
     @IBOutlet var recordButton: UIButton!
     @IBOutlet var cameraView: CameraPreviewView!
 
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+setUpCaptureSession()
 		// Resize camera preview to fill the entire screen
 		cameraView.videoPlayerView.videoGravity = .resizeAspectFill
 	}
 
-
+    private func setUpCaptureSession() {
+        
+    }
+    
     @IBAction func recordButtonPressed(_ sender: Any) {
 
 	}
