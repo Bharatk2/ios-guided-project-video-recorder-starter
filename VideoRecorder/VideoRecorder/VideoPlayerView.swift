@@ -1,9 +1,20 @@
-//
-//  VideoPlayerView.swift
-//  VideoRecorder
-//
-//  Created by Bhawnish Kumar on 6/3/20.
-//  Copyright © 2020 Lambda, Inc. All rights reserved.
-//
 
-import Foundation
+import UIKit
+import AVFoundation
+
+class CameraPreviewView: UIView {
+    
+    // this sets how the layer of the view is going to look like.
+    override class var layerClass: AnyClass {
+        return AVCaptureVideoPreviewLayer.self
+    }
+    
+    var videoPlayerView: AVCaptureVideoPreviewLayer {
+        return layer as! AVCaptureVideoPreviewLayer
+    }
+    
+    var session: AVCaptureSession? {
+        get { return videoPlayerView.session }
+        set { videoPlayerView.session = newValue }
+    }
+}

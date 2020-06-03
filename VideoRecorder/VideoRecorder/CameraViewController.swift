@@ -117,6 +117,10 @@ class CameraViewController: UIViewController {
         let fileURL = documentsDirectory.appendingPathComponent(name).appendingPathExtension("mov")
         return fileURL
     }
+    
+    private func playMovie(url: URL) {
+        
+    }
 }
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
@@ -131,6 +135,11 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
             return
         }
         print("Play Movie!")
+        
+        DispatchQueue.main.async {
+            self.playMovie(url: outputFileURL)
+        }
+    
         //play the movie if no error
         updateViews()
     }
