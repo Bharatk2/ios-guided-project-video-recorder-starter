@@ -25,6 +25,18 @@ setUpCaptureSession()
 	}
 
     private func setUpCaptureSession() {
+        // inputs
+        
+        // camera
+        
+        // microphone
+        
+        //quality level
+        
+        // outputs
+        
+        // set the captureSession into our camera preview view.
+        
         
     }
     
