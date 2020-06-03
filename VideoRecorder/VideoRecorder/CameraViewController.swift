@@ -39,6 +39,13 @@ class CameraViewController: UIViewController {
         captureSession.stopRunning()
     }
     
+    private func bestAudio() -> AVCaptureDevice {
+        if let device = AVCaptureDevice.default(for: .audio) {
+            return device
+        }
+        fatalError("No audio")
+    }
+    
     private func setUpCaptureSession() {
         captureSession.beginConfiguration()
         // inputs
@@ -55,6 +62,12 @@ class CameraViewController: UIViewController {
         captureSession.addInput(cameraInput)
         // microphone
         
+        let microphone = bestAudio()
+               guard let audioInput = try? AVCaptureDeviceInput(device: microphone),
+                   captureSession.canAddInput(audioInput) else {
+                       fatalError("Can't create and add input from microphone")
+               }
+               captureSession.addInput(audioInput)
         
         //quality level
         if captureSession.canSetSessionPreset(.hd1920x1080) {
@@ -90,6 +103,10 @@ class CameraViewController: UIViewController {
         
         
     }
+  
+    
+    
+    
     
     private func updateViews() {
         recordButton.isSelected = fileOutput.isRecording
@@ -137,12 +154,12 @@ class CameraViewController: UIViewController {
             frame.origin.y = view.layoutMargins.top 
             playerView.frame = frame
             view.addSubview(playerView)
-             self.playerView = playerView
+            self.playerView = playerView
         }
         player.play()
-         self.player = player
+        self.player = player
     }
-  
+    
 }
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
@@ -161,10 +178,10 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         DispatchQueue.main.async {
             self.playMovie(url: outputFileURL)
         }
-    
+        
         //play the movie if no error
         updateViews()
     }
-
+    
 }
 
