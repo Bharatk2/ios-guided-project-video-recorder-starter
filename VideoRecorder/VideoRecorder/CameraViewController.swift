@@ -94,6 +94,13 @@ class CameraViewController: UIViewController {
         
     }
     
+    private func toggleRecording() {
+        if fileOutput.isRecording {
+            fileOutput.stopRecording()
+        } else {
+            fileOutput.startRecording(to: newRecordingURL(), recordingDelegate: self)
+        }
+    }
     /// Creates a new file URL in the documents directory
     private func newRecordingURL() -> URL {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
