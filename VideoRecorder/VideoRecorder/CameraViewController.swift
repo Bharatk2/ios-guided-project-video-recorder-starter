@@ -49,6 +49,9 @@ setUpCaptureSession()
             return ultraWideCamera
         }
         
+        if let wideAngleCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) { // try .front
+            return wideAngleCamera
+        }
         
     }
     
