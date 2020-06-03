@@ -18,7 +18,9 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
+        
+// view must be on screen before we can transition to a new screen.
         requestPermissionAndShowCamera()
     }
     
@@ -43,6 +45,8 @@ class ViewController: UIViewController {
         case .restricted:
             // parental controls (need to inform user they don't have access, maybe ask parents?)
             fatalError("Show user UI to request permission from boss/parent/self.")
+        @unknown default:
+            fatalError("Apple added another enum value that we're not handling.")
         }
     }
     
