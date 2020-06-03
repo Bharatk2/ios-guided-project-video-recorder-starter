@@ -7,24 +7,43 @@
 //
 
 import UIKit
-
+import AVFoundation
 class ViewController: UIViewController {
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		// Do any additional setup after loading the view.
-	}
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		// TODO: get permission
-		
-		showCamera()
-		
-	}
-	
-	private func showCamera() {
-		performSegue(withIdentifier: "ShowCamera", sender: self)
-	}
+    
+    // permission to show the camera, this viewcontroller will work for that.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        requestPermissionAndShowCamera()
+    }
+    
+    // step 1
+    func requestPermissionAndShowCamera() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch status {
+        case .authorized:
+            // 2nd time user has used app (they've already authorized)
+            showCamera()
+        case .denied:
+            // 2nd time user has used app (they have not given permission.)
+            // take to the settings app (or show a custom onboarding screen to explain why need access)
+            //we need to explain why we need the access with the camera.
+            
+            
+        case .notDetermined:
+        
+        case .restricted:
+        }
+    }
+    
+    
+    private func showCamera() {
+        performSegue(withIdentifier: "ShowCamera", sender: self)
+    }
 }
