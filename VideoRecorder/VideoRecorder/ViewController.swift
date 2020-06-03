@@ -47,6 +47,16 @@ class ViewController: UIViewController {
     }
     
     private func requestPermission() {
+        // if we got access we will use this method
+        AVCaptureDevice.requestAccess(for: .video) { (granted) in
+            guard granted else {
+                fatalError("Show your UI to get them to give access")
+               // return
+            }
+            DispatchQueue.main.async {
+                self.showCamera()
+            }
+        }
         
     }
     
