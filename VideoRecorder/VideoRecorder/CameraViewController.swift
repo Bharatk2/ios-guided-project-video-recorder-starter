@@ -59,7 +59,11 @@ class CameraViewController: UIViewController {
             captureSession.sessionPreset = .hd1920x1080
         }
         // outputs
-        
+        //  step 2 add thhe output here.
+        guard captureSession.canAddOutput(fileOutput) else {
+            fatalError("Cannot add movie recording")
+        }
+        captureSession.addOutput(fileOutput)
         // set the captureSession into our camera preview view.
         captureSession.commitConfiguration()
         cameraView.session = captureSession
