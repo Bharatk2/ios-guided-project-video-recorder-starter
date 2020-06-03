@@ -25,11 +25,21 @@ setUpCaptureSession()
 	}
 
     private func setUpCaptureSession() {
+        captureSession.beginConfiguration()
         // inputs
         
         // camera
-        
+    let camera = bestCamera()
+        // get the video data
+        guard let cameraInput = try? AVCaptureDeviceInput(device: camera),
+            captureSession.canAddInput(cameraInput) else {
+                //issue? then give error
+                // FUTURE: Display the error so you understand why it failed.
+                fatalError("Cannot create cmaera input, do something better than crashing?")
+        }
+        captureSession.addInput(cameraInput)
         // microphone
+        
         
         //quality level
         
