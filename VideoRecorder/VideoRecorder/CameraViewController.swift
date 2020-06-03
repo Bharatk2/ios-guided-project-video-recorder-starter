@@ -36,9 +36,16 @@ setUpCaptureSession()
         // outputs
         
         // set the captureSession into our camera preview view.
+        captureSession.commitConfiguration()
+        cameraView.session = captureSession
         
         
     }
+    
+    private func bestCamera() -> AVCaptureDevice {
+        
+    }
+    
     
     @IBAction func recordButtonPressed(_ sender: Any) {
 
