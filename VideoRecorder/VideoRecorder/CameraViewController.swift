@@ -43,6 +43,12 @@ setUpCaptureSession()
     }
     
     private func bestCamera() -> AVCaptureDevice {
+        // ideal camera, fallback camera, FUTURE: we add a button to choose front/back
+        
+        if let ultraWideCamera = AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back) {
+            return ultraWideCamera
+        }
+        
         
     }
     
