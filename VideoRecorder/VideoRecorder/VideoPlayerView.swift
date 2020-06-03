@@ -2,7 +2,7 @@
 import UIKit
 import AVFoundation
 
-class CameraPreviewView: UIView {
+class VideoPlayerView: UIView {
     
     // this sets how the layer of the view is going to look like.
     override class var layerClass: AnyClass {
