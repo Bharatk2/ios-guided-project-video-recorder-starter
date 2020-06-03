@@ -11,7 +11,7 @@ import AVFoundation
 class CameraViewController: UIViewController {
     
     lazy var captureSession = AVCaptureSession()
-    
+    lazy private var fileOutput = AVCaptureMovieFileOutput()
     
     @IBOutlet var recordButton: UIButton!
     @IBOutlet var cameraView: CameraPreviewView!

@@ -18,8 +18,6 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
 // view must be on screen before we can transition to a new screen.
         requestPermissionAndShowCamera()
     }
