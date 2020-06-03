@@ -9,27 +9,40 @@
 import UIKit
 import AVFoundation
 class CameraViewController: UIViewController {
-
+    
     lazy var captureSession = AVCaptureSession()
     
     
     @IBOutlet var recordButton: UIButton!
     @IBOutlet var cameraView: CameraPreviewView!
-
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
-setUpCaptureSession()
-		// Resize camera preview to fill the entire screen
-		cameraView.videoPlayerView.videoGravity = .resizeAspectFill
-	}
-
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpCaptureSession()
+        // Resize camera preview to fill the entire screen
+        cameraView.videoPlayerView.videoGravity = .resizeAspectFill
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // we will add the start and stop methods here because we don't wan't it to load only once.
+        captureSession.startRunning()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        captureSession.stopRunning()
+    }
+    
     private func setUpCaptureSession() {
         captureSession.beginConfiguration()
         // inputs
         
         // camera
-    let camera = bestCamera()
+        let camera = bestCamera()
         // get the video data
         guard let cameraInput = try? AVCaptureDeviceInput(device: camera),
             captureSession.canAddInput(cameraInput) else {
@@ -74,19 +87,19 @@ setUpCaptureSession()
     
     
     @IBAction func recordButtonPressed(_ sender: Any) {
-
-	}
-	
-	/// Creates a new file URL in the documents directory
-	private func newRecordingURL() -> URL {
-		let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-
-		let formatter = ISO8601DateFormatter()
-		formatter.formatOptions = [.withInternetDateTime]
-
-		let name = formatter.string(from: Date())
-		let fileURL = documentsDirectory.appendingPathComponent(name).appendingPathExtension("mov")
-		return fileURL
-	}
+        
+    }
+    
+    /// Creates a new file URL in the documents directory
+    private func newRecordingURL() -> URL {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        
+        let name = formatter.string(from: Date())
+        let fileURL = documentsDirectory.appendingPathComponent(name).appendingPathExtension("mov")
+        return fileURL
+    }
 }
 
