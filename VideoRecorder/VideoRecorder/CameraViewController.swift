@@ -53,6 +53,11 @@ setUpCaptureSession()
             return wideAngleCamera
         }
         
+        // simulator or thr request hardware camera doesn't work
+        fatalError("No camera available , are you on simnulator") // TODO: show UI instead of a fatal error.
+        
+        
+        
     }
     
     
