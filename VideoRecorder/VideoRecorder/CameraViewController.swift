@@ -91,7 +91,7 @@ class CameraViewController: UIViewController {
     
     
     @IBAction func recordButtonPressed(_ sender: Any) {
-        
+        toggleRecording()
     }
     
     private func toggleRecording() {
@@ -112,5 +112,16 @@ class CameraViewController: UIViewController {
         let fileURL = documentsDirectory.appendingPathComponent(name).appendingPathExtension("mov")
         return fileURL
     }
+}
+extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+        
+    }
+    
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        
+    }
+    
+    
 }
 
